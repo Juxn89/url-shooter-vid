@@ -473,4 +473,5 @@ ROW-051 | behavior | REQ-009 | anonymous | n/a | Entities are never decoded into
 ROW-052 | behavior | REQ-007 | anonymous | n/a | control of ROW-053: https://example.com with a tab before it, and with a line break after it, pasted into the field and shot shows a link. | REQ-007 | owed: spec-only — first stage | origin: REQ-007
 ROW-053 | behavior | REQ-007 | anonymous | n/a | https://münchen.de, https://user:pass@example.com, https://google.com@evil.com and https://example. each show no link and change nothing. | REQ-007 | owed: spec-only — first stage | origin: REQ-007
 ROW-054 | behavior | REQ-012 | anonymous | n/a | When the page opens from file://, typing on the keyboard without clicking puts the text into the field. | REQ-012 | owed: spec-only — first stage | origin: REQ-012
+exception | EXC-001 | product | seam | the harness's own product service, reached by the tests inside the test stack's network at http://product:80; no call leaves the machine and the product itself makes no outbound call (NG-001, A-001)
 ```
