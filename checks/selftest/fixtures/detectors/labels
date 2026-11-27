@@ -1,0 +1,5 @@
+weak vacuity tests/invariants/a.spec.js:2 literal-assert
+weak vacuity tests/invariants/a.spec.js:3 or-constant
+good vacuity tests/invariants/a.spec.js:4
+weak strength tests/invariants/a.spec.js existence
+good strength ROW-005
