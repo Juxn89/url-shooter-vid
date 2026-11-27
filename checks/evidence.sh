@@ -287,7 +287,7 @@ case "${1:-}" in
         for (j = 1; j <= nd[i]; j++) if (under(D[i, j], pref)) { ST[key] = 1; break } return ST[key] }
       BEGIN {
         while ((getline l < (T "/desc")) > 0) { split(l, a, "\t"); DESC[a[1], a[2]] = 1 }
-        while ((getline l < (T "/rec")) > 0) { split(l, a, "\t"); NR_ = a[1] + 0; if (NR_ > nr) nr = NR_; RN[NR_] = a[2]; RT[NR_] = a[3]; RB[NR_] = a[4]; RSH[NR_] = a[5]
+        while ((getline l < (T "/rec")) > 0) { split(l, a, "\t"); NR_ = a[1] + 0; if (NR_ > nr) nr = NR_; RN[NR_] = a[2]; RTM[NR_] = a[3]; RB[NR_] = a[4]; RSH[NR_] = a[5]
           f = T "/diff." NR_; while ((getline p < f) > 0) { nd[NR_]++; D[NR_, nd[NR_]] = p; DS[NR_, p] = 1 } close(f) }
         while ((getline l < (T "/cases")) > 0) { split(l, a, "\t"); i = a[1] + 0; cp = a[2]; sub(/::.*/, "", cp); k = ++nc[i, cp]; CI[i, cp, k] = a[2]; CS[i, cp, k] = a[3]; CAT[i, cp] = CAT[i, cp] "\001" a[2] }
         while ((getline l < (T "/cr")) > 0) { split(l, a, "\t"); HASR[a[1] + 0] = 1; CRW[a[1] + 0, a[2]] = 1 }
@@ -341,10 +341,10 @@ case "${1:-}" in
             if (gated == "yes" && (c in RI) && ((RB[RI[c]], RB[i]) in DESC)) continue
             R[c] = CS[i, p, ix[q]]; RI[c] = i }
         }
-        if (hist == "yes") { nh = 0; for (c in R) { nh++; print id "\t" c "\t" R[c] "\t" RN[RI[c]] "\t" RT[RI[c]] } if (!nh) print id "\t-\tnot run"; next }
+        if (hist == "yes") { nh = 0; for (c in R) { nh++; print id "\t" c "\t" R[c] "\t" RN[RI[c]] "\t" RTM[RI[c]] } if (!nh) print id "\t-\tnot run"; next }
         nres = 0; bad = ""; li = 0; split("", OLD); olds = ""
         for (c in R) { nres++; if (R[c] != "passed") bad = bad (bad == "" ? "" : "; ") c " " R[c]; if (RI[c] > li) li = RI[c]
-          if (gated == "yes" && RT[RI[c]] != now && !(RB[RI[c]] in OLD)) { OLD[RB[RI[c]]] = 1; olds = olds (olds == "" ? "" : ",") RB[RI[c]] } }
+          if (gated == "yes" && RTM[RI[c]] != now && !(RB[RI[c]] in OLD)) { OLD[RB[RI[c]]] = 1; olds = olds (olds == "" ? "" : ",") RB[RI[c]] } }
         last = RN[li]
         if (nres == 0) { if (ran != "") print id "\tstale\tnever run on the current code (last run " ran ")" (pop ? " (deployed shape)" : ""); else print id "\tnever\tnever run" (pop ? " (deployed shape)" : ""); next }
         if (bad == "") print id "\tpass\t" (olds != "" ? "passed at " olds " (" last ")" : last)
