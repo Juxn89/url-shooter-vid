@@ -227,3 +227,11 @@ A-027 | human | 2026-11-27 | Q: How should the product be delivered — in which
 ```
 
 review: delta, round 1, 0 findings
+
+### 2026-11-27 (owner answer to Q1)
+
+```vid-prd-answers
+A-028 | human | 2026-11-27 | Q: Should an address with non-English letters in its path, like https://example.com/café, count as a web address? | A: Deferred to a later version: no ruling now; for this version the current behaviour stands and such an address is refused (D-012). | settles: REQ-007 | unchanged: REQ-007
+```
+
+review: delta, round 1, 0 findings
