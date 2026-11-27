@@ -59,9 +59,6 @@ vue
 jquery
 svelte
 preact
-localStorage
-sessionStorage
-Math.random
 cypress
 selenium
 puppeteer
