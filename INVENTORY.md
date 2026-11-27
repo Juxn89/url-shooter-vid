@@ -474,4 +474,5 @@ ROW-052 | behavior | REQ-007 | anonymous | n/a | control of ROW-053: https://exa
 ROW-053 | behavior | REQ-007 | anonymous | n/a | https://münchen.de, https://user:pass@example.com, https://google.com@evil.com and https://example. each show no link and change nothing. | REQ-007 | tests/invariants/row-018-019-052-053-req-007-named-sets.spec.js | origin: REQ-007 | proved-red: dba6930
 ROW-054 | behavior | REQ-012 | anonymous | n/a | When the page opens from file://, typing on the keyboard without clicking puts the text into the field. | REQ-012 | tests/invariants/row-054-req-012-file-focus.spec.js | origin: REQ-012 | proved-red: dba6930
 exception | EXC-001 | product | seam | the harness's own product service, reached by the tests inside the test stack's network at http://product:80; no call leaves the machine and the product itself makes no outbound call (NG-001, A-001)
+exception | EXC-002 | shooter.app | seam | the short-link prefix https://shooter.app/ (REQ-001, A-005) is display text the page writes into #result; the page never requests, links or navigates to it (REQ-003, NG-001; ROW-002, ROW-008)
 ```
