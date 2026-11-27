@@ -158,6 +158,38 @@ F-05 | review | advisory | DIM-session-uniqueness | noted | evidence: minor — 
 
 review: whole, round 2, 4 findings
 
+### 2026-11-27 — test list strength pass
+
+```vid-prd-findings
+F-07 | strength | advisory | INVENTORY.md:ROW-016 | repaired | evidence: an empty-branch that clears the earlier link passed; now run with a link already shown
+F-08 | strength | advisory | INVENTORY.md:ROW-016 | repaired | evidence: a required attribute raising the browser tooltip on empty passed; now checks validationMessage
+F-09 | strength | advisory | INVENTORY.md:ROW-019 | repaired | evidence: a dot anywhere after the host was accepted; localhost/a.b, ?x=a.b, #a.b added to the rejected set
+F-10 | strength | advisory | INVENTORY.md:ROW-018 | repaired | evidence: a check rejecting any colon passed; /a:b and ?t=10:30 added to the accepted set
+F-11 | strength | blocking | INVENTORY.md:ROW-007 | repaired | evidence: major — a counter-based code agreeing with its own mapping passed; now two fixed sequences must differ (both readers: shoot batch and table)
+F-12 | strength | blocking | INVENTORY.md:ROW-023 | repaired | evidence: major — memory of only the last code passed; now repeats the first of at least 5 codes (both readers: shoot batch and table)
+F-13 | strength | advisory | INVENTORY.md:ROW-006 | repaired | evidence: a reduced alphabet passed; now all 62 characters over 2,000 shots
+F-14 | strength | advisory | INVENTORY.md:ROW-010 | repaired | evidence: a CSS placeholder passed; now checks innerText, children and pseudo-element content
+F-15 | strength | advisory | INVENTORY.md:ROW-001, INVENTORY.md:ROW-010, INVENTORY.md:ROW-038 | noted | evidence: near-duplicate kept — each adds its own clause (shell, emptiness, rendering)
+F-16 | strength | advisory | INVENTORY.md:ROW-016, INVENTORY.md:ROW-019 | noted | evidence: near-duplicate kept — ROW-019 tests the regex set, ROW-016 the empty and spaces branch
+F-17 | strength | blocking | INVENTORY.md:ROW-050 | repaired | evidence: major — every address check was proved by named examples only; generated-input row added
+F-18 | strength | advisory | INVENTORY.md:ROW-051 | repaired | evidence: decoded entities could reach a hidden element; entity row added
+F-19 | strength | blocking | INVENTORY.md:ROW-007 | repaired | evidence: major — round 2: the any-byte clause failed a correct modulo mapping; clause narrowed to the first 6 bytes within 0 to 61
+F-20 | strength | blocking | INVENTORY.md:ROW-050 | repaired | evidence: major — round 2: the whitespace mutation could land at the edges and be trimmed; now strictly inside
+F-21 | strength | blocking | INVENTORY.md:ROW-007 | repaired | evidence: major — round 3: changing every byte at once failed a correct product; now one byte at a time within 0 to 61
+F-22 | strength | blocking | INVENTORY.md:ROW-050 | repaired | evidence: major — round 3: hyphen-edge labels and undefined path characters; labels and characters now stated
+```
+
+review: whole, round 3, 16 findings
+
+### 2026-11-27 — final review
+
+```vid-prd-findings
+F-23 | final | advisory | INVENTORY.md:ROW-007, REQ-002, DECISIONS.md | repaired | evidence: minor — ROW-007 assumed one byte per character, which no record pinned; D-008 pins the layout
+F-24 | final | blocking | INVENTORY.md:ROW-007, DECISIONS.md | repaired | evidence: major — round 2: a fixed byte of 62 or more could map to the same character; the fixed sequence's first 6 bytes now lie within 0 to 61
+```
+
+review: final, round 2, 2 findings, read: PRD.md ARCHITECTURE.md DECISIONS.md BASELINE.md INVENTORY.md GRADING-CHECKLIST.md
+
 ## Ratifications
 
 - 2026-11-27 — thesis+contract — 4fe040f
@@ -165,3 +197,25 @@ review: whole, round 2, 4 findings
 - 2026-11-27 — final — d66df96
 
 ## Appends
+
+### 2026-11-27 (owner answers at the test list sitting)
+
+```vid-prd-answers
+A-021 | human | 2026-11-27 | Q: Should tabs and line breaks around a pasted address be trimmed, like spaces? | A: Accepted as recommended: yes, surrounding tabs and line breaks are trimmed like spaces. | settles: REQ-007
+A-022 | human | 2026-11-27 | Q: Should a host with non-English letters, such as münchen.de, count? | A: Accepted as recommended: no, such a host is rejected. | settles: REQ-007
+A-023 | human | 2026-11-27 | Q: Should addresses with a user name and password before the host count? | A: Accepted as recommended: no, they are rejected. | settles: REQ-007
+A-024 | human | 2026-11-27 | Q: Should the field have the cursor in it as soon as the page opens? | A: Accepted as recommended: yes. | settles: REQ-012
+A-025 | human | 2026-11-27 | Q: Should a host ending in a dot, such as https://example., count? | A: Accepted as recommended: no, it is rejected. | settles: REQ-007
+A-026 | human | 2026-11-27 | Q: Should codes avoid rude words or look-alike characters? | A: Accepted as recommended: no, codes stay fully random over the whole alphabet. | settles: REQ-002 | unchanged: REQ-002, REQ-008
+```
+
+```vid-prd
+REQ-007 AMENDED | functional | T1 | The web-address check is a regular expression that, after trimming surrounding spaces, tabs and line breaks, accepts an address starting with http:// or https:// in any letter case, followed by a host name of plain letters, digits and hyphens with at least one dot and no trailing dot, then an optional path, query and anchor, and rejects anything else, including an address with a port, a space inside it, a user name before the host, or non-English letters in the host. | fail-if: (1) https://example.com is rejected; (2) http://example.com/a/b is rejected; (3) an address with surrounding spaces is rejected; (4) example.com with no scheme is accepted; (5) hello is accepted; (6) https://localhost with no dot is accepted; (7) ftp://example.com is accepted; (8) https://example.com/search?q=cats#top is rejected; (9) HTTPS://EXAMPLE.COM is rejected; (10) https://example.com:8080 is accepted; (11) https://exa mple.com is accepted; (12) an address with a surrounding tab or line break is rejected; (13) https://münchen.de is accepted; (14) https://user:pass@example.com is accepted; (15) https://example. is accepted | serves: only something that looks like a real web address deserves a short link | authority: provisional | confirms_via: owner-decision/no | source: A-006, A-009, A-018, A-019, A-020, A-021, A-022, A-023, A-025 | covers: DIM-url-acceptance | phase: pilot | feature: FEAT-02 | plain: Only text starting with http:// or https:// and a plain dotted host counts; ports, inner spaces, user names and non-English hosts are refused. | arms: 1 retained, 2 retained, 3 retained, 4 retained, 5 retained, 6 retained, 7 retained, 8 retained, 9 retained, 10 retained, 11 retained
+REQ-012 | functional | T2 | When the page opens, keyboard focus is already in the field, so the first address can be typed without clicking. | fail-if: (1) after the page opens, typing without clicking does not put the text into the field | serves: the demonstrator can start typing at once in front of the audience | authority: authoritative | source: A-024 | covers: DIM-field-reset-focus | phase: pilot | feature: FEAT-01 | plain: When the page opens, the cursor is already in the field.
+```
+
+```vid-prd-findings
+F-06 | review | advisory | A-009 | noted | evidence: minor — A-009 reads a narrower trim and looser host rule than REQ-007 AMENDED after A-021, A-022, A-023, A-025; REQ-007 AMENDED cites those answers and wins by precedence, so no build is forced wrong
+```
+
+review: delta, round 1, 1 findings
