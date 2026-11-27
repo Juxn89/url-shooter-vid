@@ -1,0 +1,8 @@
+{
+  "name": "url-shooter",
+  "private": true,
+  "description": "Test harness dependencies only; the product itself has no dependencies.",
+  "devDependencies": {
+    "@playwright/test": "1.49.1"
+  }
+}

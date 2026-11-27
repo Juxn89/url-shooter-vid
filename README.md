@@ -2,7 +2,21 @@
 
 A single-page local demo: type a web address, press the button, and a made-up short link `https://shooter.app/<6 letters and digits>` appears below the field. The link is only shown; it never redirects. Plain JavaScript, no framework, English only, run locally in Chrome. A demo, not a production app.
 
-The spec is PRD.md. How to run, how to test (`sh checks/test.sh`) and the preview command arrive with the code skeleton.
+The spec is PRD.md.
+
+## Run it
+
+Open `index.html` in Chrome (double-click it). No server is needed.
+
+## Preview what the tests certified
+
+    docker compose -f docker-compose.test.yml up --build product
+
+It serves the same page the tests check, inside Docker's own network (port 80 of the `product` service). To use the demo yourself, open `index.html` in Chrome.
+
+## Test
+
+    sh checks/test.sh
 
 ## Before you put this online
 
