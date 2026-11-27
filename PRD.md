@@ -219,3 +219,11 @@ F-06 | review | advisory | A-009 | noted | evidence: minor — A-009 reads a nar
 ```
 
 review: delta, round 1, 1 findings
+
+### 2026-11-27 (owner answer at the stage cut)
+
+```vid-prd-answers
+A-027 | human | 2026-11-27 | Q: How should the product be delivered — in which stages? | A: One stage, holding both features; no technical stage 0. | settles: contract
+```
+
+review: delta, round 1, 0 findings
