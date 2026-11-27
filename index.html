@@ -1,13 +1,17 @@
 <!doctype html>
-<!-- Purpose: the one page of URL Shooter — the field, the button and the result area (REQ-001, CON-001). Skeleton placeholder: the label, the language, the title, the encoding, the button in the Tab order and the shown result area arrive with the build. -->
-<html>
+<html lang="en">
 <head>
-<title></title>
+<meta charset="utf-8">
+<!-- Purpose: the one page of URL Shooter — the labelled field, the button and the result area (REQ-001, REQ-003, REQ-010, CON-001). -->
+<title>URL Shooter</title>
 </head>
 <body>
-<input id="url-input" type="text" autocomplete="off">
-<button id="shoot-button" type="button" tabindex="-1">Shoot</button>
-<div id="result" hidden></div>
+<!-- REQ-010: the field's visible label is tied to it; the button carries visible text. -->
+<label for="url-input">Web address</label>
+<input id="url-input" type="text" autocomplete="off" autofocus>
+<button id="shoot-button" type="button">Shoot</button>
+<!-- REQ-003, REQ-010: the result area sits below the field, empty until the first shot, a polite live region announcing each new link whole. -->
+<div id="result" aria-live="polite" aria-atomic="true"></div>
 <script src="app/shooter.js"></script>
 <script src="app/page.js"></script>
 </body>
